@@ -1,1 +1,1 @@
-print("ALE ČAU" )
+print("ALE ČAU")
