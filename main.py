@@ -1,0 +1,2 @@
+print("ALE ČAU"
+      )
