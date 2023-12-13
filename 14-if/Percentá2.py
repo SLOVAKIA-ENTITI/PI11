@@ -1,5 +1,7 @@
-percenta = int(input("Zadaj percentá:"))
-
+max_bodov = 30
+pocet_bodov = int(input("Zadaj svoj počet bodov za test."))
+percenta = (pocet_bodov / max_bodov) * 100
+print(f"Získal si {percenta}%")
 if percenta >= 90:
     print("Výborný.")
 elif 75 <= percenta:
