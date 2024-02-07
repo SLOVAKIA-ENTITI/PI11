@@ -18,13 +18,18 @@ def stvorce(x, y, pt, d, r=255, g=255, b=255):
 
 
 
-
-
-
-stvorce(20,20,20,20,255,0,0)
-stvorce(20,40,20,20,0,255,0)
-stvorce(20,60,20,20,0,0,255)
-
+x=20
+y=20
+pt=50
+d=20
+yy=y
+fg=20
+for j in range(fg):
+    for i in range(fg):
+        stvorce(x,y,pt,d,255,0,0)
+        stvorce(x,y+d,pt,d,0,255,0)
+        stvorce(x,y+d*2,pt,d,0,0,255)
+    y = y + 60
 
 
 
