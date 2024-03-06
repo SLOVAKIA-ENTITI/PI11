@@ -1,5 +1,4 @@
 import tkinter
-import random
 canvas = tkinter.Canvas(height=1000, width=1000)
 canvas.pack()
 
