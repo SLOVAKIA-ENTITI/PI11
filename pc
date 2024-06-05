@@ -1,0 +1,33 @@
+import random
+
+
+def hadanie(od, do):
+    opakovanie = random.randrange(10,25)
+    n = 0
+    číslo = random.randrange(od,do)
+    for i in range(opakovanie):
+        print(5*"-",opakovanie,"pokus",5*"-")
+        pokus = int(input("Zadaj číslo:"))
+        if pokus == číslo:
+            print("Uhádol si")
+            n = n + 1
+            break
+        elif pokus > číslo:
+            print("Skús menšie")
+            n = n +0
+        elif pokus < číslo:
+            print("Skús väčšie")
+            n = n + 0
+        else:
+            pass
+        opakovanie = opakovanie - 1
+
+    if n == 1:
+        print(10*".","Gratulujem, vyhral si!",10*".")
+    else:
+        print(10*".","Nezvládol si to skús znova.",10*".")
+
+hadanie(1,21)
+
+
+
