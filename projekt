@@ -1,0 +1,70 @@
+import tkinter, random, time
+canvas = tkinter.Canvas(width=1000, height=1000, bg='white')
+canvas.pack()
+
+
+#rychlost enemakov
+t = 0.03 #mozete zmenit
+canvas.create_oval(480,480,520,520, fill='blue')
+
+id_kruhu = None
+coords_kruhu = (0,0,0,0)
+stop = False
+
+def vytvor_kruh(x, y):
+    global id_kruhu, coords_kruhu
+    coords_kruhu = (x-20, y-20, x+20, y+20)
+    if id_kruhu is None:
+        id_kruhu = canvas.create_oval(coords_kruhu, fill='red')
+    else:
+        canvas.coords(id_kruhu, coords_kruhu)
+
+def reset_kruh():
+    global suradnica1, suradnica2, krok1, krok2, stop, id_kruhu
+
+    # vytvori suradnice pre kruh
+    suradnica1 = random.randrange(10, 990)
+    suradnica2 = random.randrange(10, 990)
+
+    # vypocita kroky k stredu canvasu
+    krok1 = (500 - suradnica1) / 100
+    krok2 = (500 - suradnica2) / 100
+    stop = False
+    id_kruhu = None
+    pohni_kruh()
+
+def pohni_kruh():
+    global suradnica1, suradnica2, stop
+    for i in range(100):
+        if stop:
+            return
+
+        #hybe kruh
+        suradnica1 += krok1
+        suradnica2 += krok2
+
+        vytvor_kruh(suradnica1, suradnica2)
+
+        if (480 <= suradnica1 <= 520) and (480 <= suradnica2 <= 520):
+            canvas.destroy()
+            return #ak sa kruh dotkne stredoveho hra skoncila
+
+        canvas.update()
+        time.sleep(t)
+    if not stop:
+        vytvor_kruh(500, 500)
+
+def klikni_na_kruh(event):
+    global coords_kruhu, id_kruhu, stop
+#toto sa pozrie ci sa kliklo v kruhu alebo nie
+    if (coords_kruhu[0] <= event.x <= coords_kruhu[2]) and (coords_kruhu[1] <= event.y <= coords_kruhu[3]):
+        canvas.delete(id_kruhu) #zmaze kruh na zaklade ID
+        id_kruhu = None #resetuje ID kruhu
+        stop = True
+        canvas.after(1000, reset_kruh)
+
+canvas.bind('<Button-1>', klikni_na_kruh)
+
+reset_kruh()
+
+canvas.mainloop()
